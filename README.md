@@ -24,13 +24,32 @@ To configure, test, and validate firewall rules on **Windows** using **Windows D
 - Observed existing allow and block rules
 - Understood how Windows controls inbound traffic using ports, protocols, and applications
 
+![Inbond](https://github.com/BhagyaDharennavar/Simple-windows-firewall-configuration/blob/main/Screenshot/inbond%20rule.png)
+
 ---
+
+## 🔹 Enabling Telnet Client (For Testing Purpose)
+
+By default, Windows does not have the Telnet client enabled. Since Telnet was required only to **test the firewall rule**, the Telnet client feature was enabled temporarily.
+
+### Steps to Enable Telnet Client:
+1. Open **Control Panel**
+2. Navigate to **Programs**
+3. Click **Turn Windows features on or off**
+4. Enable **Telnet Client**
+5. Click **OK** and wait for the feature to install
+
+⚠️ This step does **not** enable a Telnet server. It only allows the system to attempt Telnet connections for testing purposes.
+
+![Telnet Client Enabled](https://github.com/BhagyaDharennavar/Simple-windows-firewall-configuration/blob/main/Screenshot/enabled%20telnet.png)
+
 
 ### 🔹 Step 3: Create an Inbound Rule to Block Port 23 (Telnet)
 **Why block Telnet (Port 23)?**
 - Uses unencrypted communication
 - Vulnerable to credential sniffing
 - Deprecated in modern secure environments
+- 
 
 **Configuration Steps:**
 1. New Rule → Port  
@@ -39,7 +58,8 @@ To configure, test, and validate firewall rules on **Windows** using **Windows D
 4. Action: Block the connection  
 5. Applied to Domain, Private, and Public  
 6. Rule name: **Block Telnet Port 23**
-
+7. 
+![Rule created](https://github.com/BhagyaDharennavar/Simple-windows-firewall-configuration/blob/main/Screenshot/rule%20created.png)
 ---
 
 ## 🔍 Firewall Validation – Before & After Testing
@@ -55,6 +75,7 @@ telnet localhost 23
 ```
 Could not open connection to the host, on port 23: Connect failed
 ```
+![Before blocking](https://github.com/BhagyaDharennavar/Simple-windows-firewall-configuration/blob/main/Screenshot/cmd%20telnet%20before.png)
 
 ---
 
@@ -69,6 +90,7 @@ telnet localhost 23
 ```
 Could not open connection to the host, on port 23: Connect failed
 ```
+![After blocking](https://github.com/BhagyaDharennavar/Simple-windows-firewall-configuration/blob/main/Screenshot/cmd%20telnet%20after.png)
 
 ---
 
@@ -146,6 +168,8 @@ TcpTestSucceeded : False
 ```
 
 This confirms that inbound traffic on port 23 is blocked at the TCP level by the firewall.
+
+![Powershell](https://github.com/BhagyaDharennavar/Simple-windows-firewall-configuration/blob/main/Screenshot/Powershell%20telnet.png)
 
 ---
 
